@@ -94,6 +94,13 @@ void main() {
       counter1++;
     });
 
+    // old bug: the number of listeners increases
+    // the number of notifications
+    final queryStream3 = query1.findStream();
+    final subscription3 = queryStream3.listen((_) {
+      // dummy to trigger
+    });
+
     // counter2 test #.1
     final t2 = TestEntity2();
     box2.put(t2);
@@ -131,6 +138,7 @@ void main() {
 
     await subscription1.cancel();
     await subscription2.cancel();
+    await subscription3.cancel();
   });
 
   tearDown(() {
