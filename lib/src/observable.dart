@@ -38,8 +38,8 @@ class _Observable {
 
     final callback = Pointer.fromFunction<obx_observer>(_anyCallback);
     final storePtr = store.ptr;
-    _anyObserver[storePtr.address] =
-        bindings.obx_observe(storePtr, callback, storePtr.cast<Void>());
+    _anyObserver[storePtr.address] = bindings.obx_observe(
+        storePtr as Pointer<OBX_store>, callback, storePtr.cast<Void>());
     StoreCloseObserver.addListener(store, _anyObserver[storePtr.address], () {
       unsubscribe(store);
     });
